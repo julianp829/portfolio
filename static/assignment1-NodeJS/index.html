@@ -53,7 +53,7 @@
             border-radius: 7px;
             color: #ffff;
             font-size: 30px;
-            padding: 16px 25px;
+            padding: 16px 25px 16px 25px;
             text-decoration: none;
         }
 
@@ -62,39 +62,37 @@
             text-decoration: none;
         }
 
-        /* Updated styles for version and environment */
+        /* Info-bar styles */
         .info-bar {
             margin-top: 20px;
             font-family: "Indie Flower", cursive;
             font-size: 1.2rem;
             color: #ffffff;
-            background-color: red; /* Background changed to red */
+            background-color: red; /* Background set to red */
             padding: 10px;
             border-radius: 7px;
             display: inline-block;
         }
 
-        /* Secret tag styles */
-        .secret-tag {
+        /* Main Node.js tag in the upper right corner */
+        .main-node-tag {
             position: absolute;
             top: 10px;
             right: 10px;
-            background-color: red; /* Red background */
-            color: #000000; /* Black text */
+            background-color: #f39c12;
+            color: #ffffff;
             font-family: "Indie Flower", cursive;
-            font-size: 1.2rem;
-            padding: 5px 10px;
+            font-size: 1.5rem;
+            padding: 10px 15px;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add some shadow for effect */
+            display: none; /* Hidden by default, will be shown via JS */
         }
     </style>
 </head>
 
 <body>
-    <!-- Secret Tag for Production Node.js -->
-    <div class="secret-tag" id="secret-tag">
-        Production Node.js
-    </div>
+    <!-- Main Node.js Tag (Initially hidden) -->
+    <div id="main-node-tag" class="main-node-tag">Main Node.js</div>
 
     <div class="container">
         <h1>Let's Play</h1>
@@ -129,12 +127,20 @@
     </div>
 
     <script>
+        // Secret Configuration
+        var secret = "showMainNodeTag";  // Simulated secret, could be retrieved from a secure location
+
         // Environment and Version Variables
-        var environment = "Node Production"; // Change this to "Node Production" for production environment
+        var environment = "Node Main";
         var version = "2";
 
         // Set the environment and version on page load
         document.getElementById("env-info").innerHTML = `Environment: ${environment} | Version: ${version}`;
+
+        // Show Main Node.js tag if secret is correct
+        if (secret === "showMainNodeTag") {
+            document.getElementById("main-node-tag").style.display = "block";
+        }
 
         // Player names
         var player1 = "Player 1";
