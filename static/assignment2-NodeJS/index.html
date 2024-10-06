@@ -1,0 +1,173 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Game</title>
+
+    <style>
+        .container {
+            width: 70%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .dice {
+            text-align: center;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        body {
+            background-color: #042f4b;
+            margin: 0;
+        }
+
+        h1 {
+            margin: 30px;
+            font-family: "Lobster", cursive;
+            text-shadow: 5px 0 #232931;
+            font-size: 4.5rem;
+            color: #4ecca3;
+            text-align: center;
+        }
+
+        p {
+            font-size: 2rem;
+            color: #4ecca3;
+            font-family: "Indie Flower", cursive;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .bottom {
+            padding-top: 30px;
+        }
+
+        .butn {
+            background: #4ecca3;
+            font-family: "Indie Flower", cursive;
+            border-radius: 7px;
+            color: #ffff;
+            font-size: 30px;
+            padding: 16px 25px;
+            text-decoration: none;
+        }
+
+        .butn:hover {
+            background: #232931;
+            text-decoration: none;
+        }
+
+        /* Updated styles for version and environment */
+        .info-bar {
+            margin-top: 20px;
+            font-family: "Indie Flower", cursive;
+            font-size: 1.2rem;
+            color: #ffffff;
+            background-color: red; /* Background changed to red */
+            padding: 10px;
+            border-radius: 7px;
+            display: inline-block;
+        }
+
+        /* Secret tag styles */
+        .secret-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: red; /* Red background */
+            color: #000000; /* Black text */
+            font-family: "Indie Flower", cursive;
+            font-size: 1.2rem;
+            padding: 5px 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add some shadow for effect */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Secret Tag for Production Node.js -->
+    <div class="secret-tag" id="secret-tag">
+        Production Node.js
+    </div>
+
+    <div class="container">
+        <h1>Let's Play</h1>
+
+        <div class="dice">
+            <p class="Player1">Player 1</p>
+            <img class="img1" src="dice6.png">
+        </div>
+
+        <div class="dice">
+            <p class="Player2">Player 2</p>
+            <img class="img2" src="dice6.png">
+        </div>
+    </div>
+
+    <div class="container bottom">
+        <button type="button" class="butn" onClick="rollTheDice()">
+            Roll the Dice
+        </button>
+    </div>
+    <div class="container bottom">
+        <button type="button" class="butn" onClick="editNames()">
+            Edit Names
+        </button>
+    </div>
+
+    <!-- Environment Identifier and Version Number -->
+    <div class="container bottom">
+        <div class="info-bar" id="env-info">
+            <!-- These values will be set via JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Environment and Version Variables
+        var environment = "Node Production"; // Change this to "Node Production" for production environment
+        var version = "2";
+
+        // Set the environment and version on page load
+        document.getElementById("env-info").innerHTML = `Environment: ${environment} | Version: ${version}`;
+
+        // Player names
+        var player1 = "Player 1";
+        var player2 = "Player 2";
+
+        // Function to change the player names
+        function editNames() {
+            player1 = prompt("Change Player1 name");
+            player2 = prompt("Change Player2 name");
+
+            document.querySelector("p.Player1").innerHTML = player1;
+            document.querySelector("p.Player2").innerHTML = player2;
+        }
+
+        // Function to roll the dice
+        function rollTheDice() {
+            setTimeout(function () {
+                var randomNumber1 = Math.floor(Math.random() * 6) + 1;
+                var randomNumber2 = Math.floor(Math.random() * 6) + 1;
+
+                document.querySelector(".img1").setAttribute("src", "dice" + randomNumber1 + ".png");
+                document.querySelector(".img2").setAttribute("src", "dice" + randomNumber2 + ".png");
+
+                if (randomNumber1 === randomNumber2) {
+                    document.querySelector("h1").innerHTML = "Draw!";
+                } else if (randomNumber1 < randomNumber2) {
+                    document.querySelector("h1").innerHTML = (player2 + " WINS!");
+                } else {
+                    document.querySelector("h1").innerHTML = (player1 + " WINS!");
+                }
+            }, 2500);
+        }
+    </script>
+</body>
+
+</html>
